@@ -77,18 +77,16 @@ async def show_feed(callback: CallbackQuery, city_id: int, offset: int):
     station = stations[idx]
 
     latest = await svc.get_last_reports(station.id)
-    card = svc.format_card(station, latest)
+    card = svc.format_feed_card(station, latest)
     card += f"\n\n🎲 {idx + 1}/{len(stations)}"
 
     buttons = [
-        [InlineKeyboardButton(text=f"📝 Отчёт: {fuel}", callback_data=f"report_fuel:{station.id}:{fuel}")]
-        for fuel in (station.fuel_types or [])
+        [
+            InlineKeyboardButton(text="⬅️ Назад", callback_data=f"feed_next:{city_id}:{idx - 1}"),
+            InlineKeyboardButton(text="➡️ Дальше", callback_data=f"feed_next:{city_id}:{idx + 1}"),
+        ],
+        [InlineKeyboardButton(text="🔙 К городам", callback_data="feed_cities_back")],
     ]
-    buttons.append([
-        InlineKeyboardButton(text="⬅️ Назад", callback_data=f"feed_next:{city_id}:{idx - 1}"),
-        InlineKeyboardButton(text="➡️ Дальше", callback_data=f"feed_next:{city_id}:{idx + 1}"),
-    ])
-    buttons.append([InlineKeyboardButton(text="🔙 К городам", callback_data="feed_cities_back")])
     kb = InlineKeyboardMarkup(inline_keyboard=buttons)
 
     try:

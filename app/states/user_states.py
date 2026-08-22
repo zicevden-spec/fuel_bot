@@ -4,3 +4,4 @@
 class ReportState(StatesGroup):
     waiting_availability = State()
     waiting_queue = State()
+    waiting_price = State()

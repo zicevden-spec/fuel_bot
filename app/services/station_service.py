@@ -81,11 +81,12 @@ def format_card(station: Station, latest: dict) -> str:
             age = datetime.utcnow() - r.created_at
             hours = int(age.total_seconds() // 3600)
             time_str = f"{hours} ч. назад" if hours > 0 else "только что"
+            price_str = f" | 💰 {r.price:.2f}₽" if r.price else ""
             lines.append(
                 f"{AVAILABILITY_EMOJI.get(r.availability, '')} {fuel}: "
                 f"{AVAILABILITY_TEXT.get(r.availability, r.availability)} | "
                 f"{QUEUE_EMOJI.get(r.queue_level, '')} {QUEUE_TEXT.get(r.queue_level, r.queue_level)} | "
-                f"🕐 {time_str}"
+                f"🕐 {time_str}{price_str}"
             )
     return "\n".join(lines)
 
@@ -95,3 +96,30 @@ def compact_summary(summary: dict) -> str:
     if not summary:
         return ""
     return "  " + " ".join(f"{AVAILABILITY_EMOJI.get(st, '')} {fuel}" for fuel, st in summary.items())
+
+
+def format_feed_card(station: Station, latest: dict) -> str:
+    """Читаемая карточка для ленты: каждый вид топлива отдельным блоком"""
+    lines = [f"⛽ {station.brand} — {station.name}", f"📍 {station.address}", ""]
+    if not latest:
+        lines.append("📭 Данных пока нет.")
+        return "\n".join(lines)
+
+    for fuel, r in latest.items():
+        age = datetime.utcnow() - r.created_at
+        hours = int(age.total_seconds() // 3600)
+        time_str = f"{hours} ч. назад" if hours > 0 else "только что"
+        lines.append(
+            f"{AVAILABILITY_EMOJI.get(r.availability, '')} {fuel} · "
+            f"{AVAILABILITY_TEXT.get(r.availability, r.availability)} · "
+            f"{QUEUE_EMOJI.get(r.queue_level, '')} {QUEUE_TEXT.get(r.queue_level, r.queue_level)}"
+        )
+        price_time = f"💰 {r.price:.2f}₽" if r.price else ""
+        if price_time:
+            price_time += f" · {time_str}"
+        else:
+            price_time = time_str
+        lines.append(f"{price_time}")
+        lines.append("")
+
+    return "\n".join(lines).rstrip()

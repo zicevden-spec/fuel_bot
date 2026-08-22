@@ -1,5 +1,5 @@
 ﻿from datetime import datetime
-from sqlalchemy import BigInteger, String, Boolean, DateTime, ForeignKey, Text, Integer, JSON
+from sqlalchemy import BigInteger, String, Boolean, DateTime, ForeignKey, Text, Integer, JSON, Float
 from sqlalchemy.orm import Mapped, mapped_column
 from app.database.base import Base
 
@@ -51,6 +51,7 @@ class Report(Base):
     fuel_type: Mapped[str] = mapped_column(String(20))
     availability: Mapped[str] = mapped_column(String(20))
     queue_level: Mapped[str] = mapped_column(String(20))
+    price: Mapped[float | None] = mapped_column(Float, nullable=True)
     comment: Mapped[str | None] = mapped_column(Text)
     raw_input: Mapped[str | None] = mapped_column(Text)
     moderation_status: Mapped[str] = mapped_column(String(20), default="approved")
