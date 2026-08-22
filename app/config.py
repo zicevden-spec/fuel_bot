@@ -1,4 +1,4 @@
-﻿from pydantic_settings import BaseSettings
+﻿from pydantic_settings import BaseSettings, SettingsConfigDict
 from pydantic import SecretStr
 
 
@@ -8,10 +8,12 @@ class Settings(BaseSettings):
     DATABASE_URL: str
     REDIS_URL: str
     DEBUG: bool = False
+    PROXY_URL: str | None = None
 
-    class Config:
-        env_file = ".env"
-        env_file_encoding = ""utf-8"
+    model_config = SettingsConfigDict(
+        env_file='.env',
+        env_file_encoding='utf-8'
+    )
 
 
 def get_settings() -> Settings:
