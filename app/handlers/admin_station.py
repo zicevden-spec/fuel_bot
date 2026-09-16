@@ -82,7 +82,7 @@ async def finish_add_station(message: Message, state: FSMContext):
             brand=data["brand"],
             address=data["address"],
             fuel_types=fuel_types,
-            is_verified=True,
+            is_verified=True,  # Заправки от админа сразу активны
             created_by=user.id,
         )
         session.add(station)

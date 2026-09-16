@@ -19,7 +19,7 @@ def admin_menu_kb() -> ReplyKeyboardMarkup:
     """Меню администратора"""
     buttons = [
         [KeyboardButton(text="➕ Добавить город"), KeyboardButton(text="➕ Добавить заправку")],
-        [KeyboardButton(text="🛡 Модерация"), KeyboardButton(text="📢 Рассылка")],
+        [KeyboardButton(text="📢 Рассылка")],
         [KeyboardButton(text="🔙 Назад")],
     ]
     return ReplyKeyboardMarkup(keyboard=buttons, resize_keyboard=True)
