@@ -1,1 +1,13 @@
-Nothing needs to be added to .gitignore since the changes only include source/config files (.md, .yml, .service, .sh) without any build artifacts, dependencies, or temporary files.
+```
+# Compiled Python files
+*.pyc
+__pycache__/
+
+# Environment files
+.env
+.env.local
+*.env.*
+
+# Database file
+fuel_bot.db
+```
