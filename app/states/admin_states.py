@@ -16,11 +16,3 @@ class AddStation(StatesGroup):
 class BroadcastState(StatesGroup):
     waiting_message = State()
     confirming = State()
-
-
-class ModerationReportState(StatesGroup):
-    viewing = State()
-
-
-class ModerationStationState(StatesGroup):
-    viewing = State()

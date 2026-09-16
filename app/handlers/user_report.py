@@ -94,9 +94,9 @@ async def finish_report(event, state: FSMContext, from_text: bool):
             availability=data["availability"],
             queue_level=data["queue_level"],
             price=data.get("price"),
-            moderation_status="pending"  # Отчёт попадает на модерацию
+            moderation_status="approved"  # Отчёт публикуется сразу без модерации
         )
         session.add(report)
         await session.commit()
 
-    await message.answer("✅ Спасибо! Твой отчёт отправлен на модерацию.")
+    await message.answer("✅ Спасибо! Твой отчёт опубликован.")

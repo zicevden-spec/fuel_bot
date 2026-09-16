@@ -9,7 +9,6 @@ from app.database.base import init_db
 from app.handlers.user import router as user_router
 from app.handlers.admin_city import router as admin_city_router
 from app.handlers.admin_station import router as admin_station_router
-from app.handlers.admin_moderation import router as admin_moderation_router
 from app.handlers.admin_broadcast import router as admin_broadcast_router
 from app.handlers.user_stations import router as user_stations_router
 from app.handlers.user_report import router as user_report_router
@@ -37,7 +36,6 @@ async def main():
     dp.include_router(user_router)
     dp.include_router(admin_city_router)
     dp.include_router(admin_station_router)
-    dp.include_router(admin_moderation_router)
     dp.include_router(admin_broadcast_router)
     dp.include_router(user_stations_router)
     dp.include_router(user_report_router)
