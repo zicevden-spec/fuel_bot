@@ -1,0 +1,22 @@
+[Unit]
+Description=Telegram Fuel Bot
+After=network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/workspace
+Environment="PATH=/usr/local/bin:/usr/bin:/bin"
+ExecStart=/usr/local/bin/python -m app
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=fuel_bot
+
+# Опционально: ограничить ресурсы
+# MemoryLimit=512M
+# CPUQuota=50%
+
+[Install]
+WantedBy=multi-user.target
