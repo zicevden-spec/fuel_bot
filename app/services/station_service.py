@@ -15,7 +15,10 @@ async def get_last_reports(station_id: int) -> dict:
     async with async_session() as session:
         result = await session.execute(
             select(Report)
-            .where(Report.station_id == station_id)
+            .where(
+                Report.station_id == station_id,
+                Report.moderation_status == "approved"  # Показываем только подтверждённые отчёты
+            )
             .order_by(Report.created_at.desc())
         )
         reports = result.scalars().all()

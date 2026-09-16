@@ -11,3 +11,16 @@ class AddStation(StatesGroup):
     waiting_brand = State()
     waiting_address = State()
     waiting_fuel = State()
+
+
+class BroadcastState(StatesGroup):
+    waiting_message = State()
+    confirming = State()
+
+
+class ModerationReportState(StatesGroup):
+    viewing = State()
+
+
+class ModerationStationState(StatesGroup):
+    viewing = State()

@@ -1,9 +1,1 @@
-﻿venv/
-__pycache__/
-*.pyc
-.env
-.vscode/
-*.db
-.mypy_cache/
-.pytest_cache/
-*.log
+Nothing needs to be added to .gitignore since the changes only include Python source files (.py) and no build artifacts, dependencies, or temporary files that should be ignored.

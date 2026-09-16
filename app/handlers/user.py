@@ -30,8 +30,3 @@ async def back_to_main(message: Message):
         "Главное меню:",
         reply_markup=main_menu_kb(is_admin(message.from_user.id))
     )
-
-
-@router.message(F.text.in_({"🛡 Модерация", "📢 Рассылка"}))
-async def stub(message: Message):
-    await message.answer("🚧 Раздел в разработке, скоро будет!")
